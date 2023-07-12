@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "74413758545",
+    "project_id": "wallspark-9b981",
+    "storage_bucket": "wallspark-9b981.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74413758545:android:82f057fc58805a5cd00070",
+        "android_client_info": {
+          "package_name": "com.wallspark.aiwallpapers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74413758545-1kmaq3h2idtnaln1ifhk1t95qennee02.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wallspark.aiwallpapers",
+            "certificate_hash": "0a0580db31ffe9daaaea2c9a952aa1ebaf602fdf"
+          }
+        },
+        {
+          "client_id": "74413758545-hr85bvac9gomj72o71d8mrcggp853ugt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKoOTai_xwc9hjc27breX7NLT0bGBLxmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74413758545-hr85bvac9gomj72o71d8mrcggp853ugt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74413758545:android:a0009fdb3b2f0704d00070",
+        "android_client_info": {
+          "package_name": "com.wallspark.aiwallpapersapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "74413758545-hr85bvac9gomj72o71d8mrcggp853ugt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKoOTai_xwc9hjc27breX7NLT0bGBLxmw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "74413758545-hr85bvac9gomj72o71d8mrcggp853ugt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

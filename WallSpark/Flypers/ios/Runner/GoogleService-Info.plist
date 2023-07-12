@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>74413758545-aq74a17do6mf6d79ha15o5kakguk5vkf.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.74413758545-aq74a17do6mf6d79ha15o5kakguk5vkf</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>74413758545-1kmaq3h2idtnaln1ifhk1t95qennee02.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCM2BimqO96J5rgRPiYBQx9ydpWO3yxWtM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>74413758545</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.wallspark.aiwallpapersapp</string>
+	<key>PROJECT_ID</key>
+	<string>wallspark-9b981</string>
+	<key>STORAGE_BUCKET</key>
+	<string>wallspark-9b981.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:74413758545:ios:b2fda7794b4df52ed00070</string>
+</dict>
+</plist>
