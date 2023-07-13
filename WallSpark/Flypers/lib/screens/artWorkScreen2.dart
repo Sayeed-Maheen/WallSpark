@@ -133,7 +133,7 @@ class _ArtworkScreen2State extends State<ArtworkScreen2> {
   void _createRewardedAd() {
     RewardedAd.load(
         adUnitId: Platform.isAndroid
-            ? 'ca-app-pub-3940256099942544/5224354917'
+            ? 'ca-app-pub-3970755962562533/4805760345'
             : 'ca-app-pub-3940256099942544/1712485313',
         request: request,
         rewardedAdLoadCallback: RewardedAdLoadCallback(
