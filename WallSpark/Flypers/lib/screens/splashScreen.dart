@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/appColors.dart';
@@ -23,12 +24,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.dark,
+      ),
+    );
     return Scaffold(
-      backgroundColor: AppColors.colorPrimary,
+      backgroundColor: AppColors.colorWhite,
       body: SizedBox(
         width: double.infinity,
         child: Center(
-          child: Image.asset("assets/images/appLogo.png",
+          child: Image.asset("assets/images/splash.png",
               height: 190.h,
               width: 190.w),
         ),
