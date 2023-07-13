@@ -61,7 +61,7 @@ dependencies:
   permission_handler:
   image_gallery_saver:
   flutterfire_ui: ^0.4.3+20
-  google_mobile_ads: ^2.4.0
+  google_mobile_ads: ^3.0.0
 
 dev_dependencies:
   flutter_test:
