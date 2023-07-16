@@ -145,7 +145,7 @@ class _ArtworkWallpaperScreenState extends State<ArtworkWallpaperScreen> {
     RewardedAd.load(
         adUnitId: Platform.isAndroid
             ? 'ca-app-pub-3970755962562533/4805760345'
-            : 'ca-app-pub-3940256099942544/1712485313',
+            : 'ca-app-pub-3970755962562533/4805760345',
         request: request,
         rewardedAdLoadCallback: RewardedAdLoadCallback(
           onAdLoaded: (RewardedAd ad) {
