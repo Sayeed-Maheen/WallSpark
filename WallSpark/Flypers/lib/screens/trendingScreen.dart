@@ -191,7 +191,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
     }
   }
 
-  Future<void> _save(String image) async {
+  Future<void> _save(String image, BuildContext context) async {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -207,24 +207,50 @@ class _TrendingScreenState extends State<TrendingScreen> {
 
     var status = await Permission.storage.request();
     if (status.isGranted) {
-      var response = await Dio()
-          .get(image, options: Options(responseType: ResponseType.bytes));
+      var response = await Dio().get(
+        image,
+        options: Options(responseType: ResponseType.bytes),
+      );
+
       final result = await ImageGallerySaver.saveImage(
-          Uint8List.fromList(response.data),
-          quality: 60,
-          name: "hello");
+        Uint8List.fromList(response.data),
+        quality: 60,
+        name: "hello",
+      );
+
       print(result);
 
+      if (result['isSuccess']) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Image saved successfully.'),
+              duration: Duration(seconds: 1),
+            ),
+          );
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Failed to save image.'),
+              duration: Duration(seconds: 1),
+            ),
+          );
+        }
+      }
+    } else if (status.isPermanentlyDenied || status.isDenied) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Image saved successfully.'),
+            content: Text('Permission denied to access storage.'),
             duration: Duration(seconds: 1),
           ),
         );
       }
     }
   }
+
 
   RewardedAd? _rewardedAd;
   int _numRewardedLoadAttempts = 0;
@@ -369,152 +395,159 @@ class _TrendingScreenState extends State<TrendingScreen> {
                   alignment: Alignment.topRight,
                   child: InkWell(
                     onTap: () {
-                      showModalBottomSheet(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(24),
-                            topRight: Radius.circular(24),
-                          ),
-                        ),
-                        context: context,
-                        builder: (BuildContext context) {
-                          return SizedBox(
-                            height: 300.h,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 24),
-                              child: Column(
-                                children: <Widget>[
-                                  SizedBox(height: 16.h),
-                                  Image.asset("assets/images/box.png",
-                                      height: 6.h, width: 40.w),
-                                  SizedBox(height: 24.h),
-                                  Text(
-                                    "What would like to do?",
-                                    style: TextStyle(
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700,
-                                        color: AppColors.colorTextMainBlack),
-                                  ),
-                                  SizedBox(height: 24.h),
-                                  Row(
-                                    children: [
-                                      Image.asset(
-                                        "assets/images/phone.png",
-                                        height: 20.h,
-                                        width: 20.w,
-                                      ),
-                                      SizedBox(width: 12.w),
-                                      InkWell(
-                                        onTap: () {
-                                          _setWallpaperForHome(
-                                              data?['imageUrl']);
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text(
-                                          'Set on home screen',
-                                          style: TextStyle(
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400,
-                                              color:
-                                                  AppColors.colorTextMainBlack),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 12.h),
-                                  const Divider(height: 1),
-                                  SizedBox(height: 16.h),
-                                  Row(
-                                    children: [
-                                      Image.asset(
-                                        "assets/images/lockPhone.png",
-                                        height: 20.h,
-                                        width: 20.w,
-                                      ),
-                                      SizedBox(width: 12.w),
-                                      InkWell(
-                                        onTap: () {
-                                          _setWallpaperForLock(
-                                              data?['imageUrl']);
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text(
-                                          "Set on lock screen",
-                                          style: TextStyle(
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400,
-                                              color:
-                                                  AppColors.colorTextMainBlack),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 12.h),
-                                  const Divider(height: 1),
-                                  SizedBox(height: 16.h),
-                                  Row(
-                                    children: [
-                                      Image.asset(
-                                        "assets/images/lockPhone2.png",
-                                        height: 20.h,
-                                        width: 20.w,
-                                      ),
-                                      SizedBox(width: 12.w),
-                                      InkWell(
-                                        onTap: () {
-                                          _setWallpaperForBoth(
-                                              data?['imageUrl']);
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text(
-                                          'Set on both screen',
-                                          style: TextStyle(
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400,
-                                              color:
-                                                  AppColors.colorTextMainBlack),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 12.h),
-                                  const Divider(height: 1),
-                                  SizedBox(height: 16.h),
-                                  Row(
-                                    children: [
-                                      Image.asset(
-                                        "assets/images/save.png",
-                                        height: 24.h,
-                                        width: 24.w,
-                                      ),
-                                      SizedBox(width: 12.w),
-                                      InkWell(
-                                        onTap: () {
-                                          _save(data?['imageUrl']);
-                                          Navigator.pop(context);
-                                          _showRewardedAd();
-                                        },
-                                        child: Text(
-                                          'Save to device',
-                                          style: TextStyle(
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400,
-                                              color:
-                                                  AppColors.colorTextMainBlack),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
+                      _save(data?['imageUrl'], context);
+
+                      //Navigator.pop(context);
+                      _showRewardedAd();
+                      // showModalBottomSheet(
+                      //   shape: const RoundedRectangleBorder(
+                      //     borderRadius: BorderRadius.only(
+                      //       topLeft: Radius.circular(24),
+                      //       topRight: Radius.circular(24),
+                      //     ),
+                      //   ),
+                      //   context: context,
+                      //   builder: (BuildContext context) {
+                      //     return SizedBox(
+                      //       height: 300.h,
+                      //       child: Padding(
+                      //         padding:
+                      //             const EdgeInsets.symmetric(horizontal: 24),
+                      //         child: Column(
+                      //           children: <Widget>[
+                      //             SizedBox(height: 16.h),
+                      //             Image.asset("assets/images/box.png",
+                      //                 height: 6.h, width: 40.w),
+                      //             SizedBox(height: 24.h),
+                      //             Text(
+                      //               "What would like to do?",
+                      //               style: TextStyle(
+                      //                   fontSize: 16.sp,
+                      //                   fontWeight: FontWeight.w700,
+                      //                   color: AppColors.colorTextMainBlack),
+                      //             ),
+                      //             SizedBox(height: 24.h),
+                      //             Row(
+                      //               children: [
+                      //                 Image.asset(
+                      //                   "assets/images/phone.png",
+                      //                   height: 20.h,
+                      //                   width: 20.w,
+                      //                 ),
+                      //                 SizedBox(width: 12.w),
+                      //                 InkWell(
+                      //                   onTap: () async{
+                      //                     _setWallpaperForHome(
+                      //                         data?['imageUrl']);
+                      //
+                      //
+                      //                     Navigator.pop(context);
+                      //                   },
+                      //                   child: Text(
+                      //                     'Set on home screen',
+                      //                     style: TextStyle(
+                      //                         fontSize: 14.sp,
+                      //                         fontWeight: FontWeight.w400,
+                      //                         color:
+                      //                             AppColors.colorTextMainBlack),
+                      //                   ),
+                      //                 ),
+                      //               ],
+                      //             ),
+                      //             SizedBox(height: 12.h),
+                      //             const Divider(height: 1),
+                      //             SizedBox(height: 16.h),
+                      //             Row(
+                      //               children: [
+                      //                 Image.asset(
+                      //                   "assets/images/lockPhone.png",
+                      //                   height: 20.h,
+                      //                   width: 20.w,
+                      //                 ),
+                      //                 SizedBox(width: 12.w),
+                      //                 InkWell(
+                      //                   onTap: () {
+                      //                     _setWallpaperForLock(
+                      //                         data?['imageUrl']);
+                      //                     Navigator.pop(context);
+                      //                   },
+                      //                   child: Text(
+                      //                     "Set on lock screen",
+                      //                     style: TextStyle(
+                      //                         fontSize: 14.sp,
+                      //                         fontWeight: FontWeight.w400,
+                      //                         color:
+                      //                             AppColors.colorTextMainBlack),
+                      //                   ),
+                      //                 ),
+                      //               ],
+                      //             ),
+                      //             SizedBox(height: 12.h),
+                      //             const Divider(height: 1),
+                      //             SizedBox(height: 16.h),
+                      //             Row(
+                      //               children: [
+                      //                 Image.asset(
+                      //                   "assets/images/lockPhone2.png",
+                      //                   height: 20.h,
+                      //                   width: 20.w,
+                      //                 ),
+                      //                 SizedBox(width: 12.w),
+                      //                 InkWell(
+                      //                   onTap: () {
+                      //                     _setWallpaperForBoth(
+                      //                         data?['imageUrl']);
+                      //                     Navigator.pop(context);
+                      //                   },
+                      //                   child: Text(
+                      //                     'Set on both screen',
+                      //                     style: TextStyle(
+                      //                         fontSize: 14.sp,
+                      //                         fontWeight: FontWeight.w400,
+                      //                         color:
+                      //                             AppColors.colorTextMainBlack),
+                      //                   ),
+                      //                 ),
+                      //               ],
+                      //             ),
+                      //             SizedBox(height: 12.h),
+                      //             const Divider(height: 1),
+                      //             SizedBox(height: 16.h),
+                      //             Row(
+                      //               children: [
+                      //                 Image.asset(
+                      //                   "assets/images/save.png",
+                      //                   height: 24.h,
+                      //                   width: 24.w,
+                      //                 ),
+                      //                 SizedBox(width: 12.w),
+                      //                 InkWell(
+                      //                   onTap: () async {
+                      //                     _save(data?['imageUrl'], context);
+                      //
+                      //                     Navigator.pop(context);
+                      //                     _showRewardedAd();
+                      //                   },
+                      //                   child: Text(
+                      //                     'Save to device',
+                      //                     style: TextStyle(
+                      //                         fontSize: 14.sp,
+                      //                         fontWeight: FontWeight.w400,
+                      //                         color:
+                      //                             AppColors.colorTextMainBlack),
+                      //                   ),
+                      //                 ),
+                      //               ],
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     );
+                      //   },
+                      // );
                     },
                     child: SvgPicture.asset(
-                      "assets/images/trending_page_dawnload_icon.svg",
+                      "assets/images/trendingDownload.svg",
                       height: 48.h,
                       width: 48.w,
                     ),
@@ -527,4 +560,6 @@ class _TrendingScreenState extends State<TrendingScreen> {
       )),
     );
   }
+
+
 }

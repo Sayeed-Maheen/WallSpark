@@ -87,31 +87,59 @@ class _ArtworkWallpaperScreenState extends State<ArtworkWallpaperScreen> {
     }
   }
 
-  Future<void> _save(String image) async {
+  Future<void> _save(String image, BuildContext context) async {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Saving image...'),
-          duration: Duration(seconds: 1),
         ),
       );
     }
 
+    TextStyle _selectedStyle = const TextStyle(
+      color: Colors.white,
+      // Set any other style properties as per your design requirements
+    );
+
     var status = await Permission.storage.request();
-    if(status.isGranted){
+    if (status.isGranted) {
       var response = await Dio().get(
-          image,
-          options: Options(responseType: ResponseType.bytes));
+        image,
+        options: Options(responseType: ResponseType.bytes),
+      );
+
       final result = await ImageGallerySaver.saveImage(
-          Uint8List.fromList(response.data),
-          quality: 60,
-          name: "hello");
+        Uint8List.fromList(response.data),
+        quality: 60,
+        name: "hello",
+      );
+
       print(result);
 
+      if (result['isSuccess']) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Image saved successfully.'),
+              duration: Duration(seconds: 1),
+            ),
+          );
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Failed to save image.'),
+              duration: Duration(seconds: 1),
+            ),
+          );
+        }
+      }
+    } else if (status.isPermanentlyDenied || status.isDenied) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Image saved successfully.'),
+            content: Text('Permission denied to access storage.'),
             duration: Duration(seconds: 1),
           ),
         );
@@ -394,7 +422,7 @@ class _ArtworkWallpaperScreenState extends State<ArtworkWallpaperScreen> {
                                               SizedBox(width: 12.w),
                                               InkWell(
                                                 onTap: (){
-                                                  _save(querySnapshot!.docs[0].get('imageUrl'));
+                                                  _save(querySnapshot!.docs[0].get('imageUrl'), context);
                                                   _showRewardedAd();
                                                   Navigator.pop(context);
                                                 },
@@ -423,7 +451,7 @@ class _ArtworkWallpaperScreenState extends State<ArtworkWallpaperScreen> {
                         ),
                         InkWell(
                           onTap: () {
-                            _save(querySnapshot!.docs[0].get('imageUrl'));
+                            _save(querySnapshot!.docs[0].get('imageUrl') , context);
                             _showRewardedAd();
                           },
                           child: Container(

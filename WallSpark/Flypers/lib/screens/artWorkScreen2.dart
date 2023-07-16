@@ -79,7 +79,7 @@ class _ArtworkScreen2State extends State<ArtworkScreen2> {
     }
   }
 
-  Future<void> _save(String image) async {
+  Future<void> _save(String image, BuildContext context) async {
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -94,20 +94,44 @@ class _ArtworkScreen2State extends State<ArtworkScreen2> {
     );
 
     var status = await Permission.storage.request();
-    if(status.isGranted){
+    if (status.isGranted) {
       var response = await Dio().get(
-          image,
-          options: Options(responseType: ResponseType.bytes));
+        image,
+        options: Options(responseType: ResponseType.bytes),
+      );
+
       final result = await ImageGallerySaver.saveImage(
-          Uint8List.fromList(response.data),
-          quality: 60,
-          name: "hello");
+        Uint8List.fromList(response.data),
+        quality: 60,
+        name: "hello",
+      );
+
       print(result);
 
+      if (result['isSuccess']) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Image saved successfully.'),
+              duration: Duration(seconds: 1),
+            ),
+          );
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Failed to save image.'),
+              duration: Duration(seconds: 1),
+            ),
+          );
+        }
+      }
+    } else if (status.isPermanentlyDenied || status.isDenied) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Image saved successfully.'),
+            content: Text('Permission denied to access storage.'),
             duration: Duration(seconds: 1),
           ),
         );
@@ -525,7 +549,7 @@ class _ArtworkScreen2State extends State<ArtworkScreen2> {
                                                         onTap: () {
                                                           _save(snapshot.data
                                                               ?.docs[_current]
-                                                          ['imageUrl']);
+                                                          ['imageUrl'], context);
                                                           Navigator.pop(
                                                               context);
                                                           _showRewardedAd();
@@ -559,7 +583,7 @@ class _ArtworkScreen2State extends State<ArtworkScreen2> {
                                 InkWell(
                                   onTap: () {
                                     _save(snapshot.data?.docs[_current]
-                                    ['imageUrl']);
+                                    ['imageUrl'], context);
                                     _showRewardedAd();
                                   },
                                   child: Container(
