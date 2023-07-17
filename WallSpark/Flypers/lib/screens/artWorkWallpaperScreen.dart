@@ -301,154 +301,149 @@ class _ArtworkWallpaperScreenState extends State<ArtworkWallpaperScreen> {
                       children: [
                         InkWell(
                           onTap: () {
-                            // showModalBottomSheet(
-                            //   shape: const RoundedRectangleBorder(
-                            //     borderRadius: BorderRadius.only(
-                            //       topLeft: Radius.circular(24),
-                            //       topRight: Radius.circular(24),
-                            //     ),
-                            //   ),
-                            //   context: context,
-                            //   builder: (BuildContext context) {
-                            //     return Container(
-                            //       height: 300.h,
-                            //       child: Padding(
-                            //         padding: const EdgeInsets.symmetric(horizontal: 24),
-                            //         child: Column(
-                            //           children: <Widget>[
-                            //             SizedBox(height: 16.h),
-                            //             Image.asset("assets/images/box.png", height: 6.h, width: 40.w),
-                            //             SizedBox(height: 24.h),
-                            //             Text(
-                            //               "What would like to do?",
-                            //               style: TextStyle(
-                            //                   fontSize: 16.sp,
-                            //                   fontWeight: FontWeight.w700,
-                            //                   color: AppColors.colorTextMainBlack),
-                            //             ),
-                            //             SizedBox(height: 24.h),
-                            //             Container(
-                            //               child: Row(
-                            //                 children: [
-                            //                   Image.asset(
-                            //                     "assets/images/phone.png",
-                            //                     height: 20.h,
-                            //                     width: 20.w,
-                            //                   ),
-                            //                   SizedBox(width: 12.w),
-                            //                   InkWell(
-                            //                     onTap: (){
-                            //                       _setWallpaperForHome(querySnapshot!.docs[0].get('imageUrl'));
-                            //                       Navigator.pop(context);
-                            //                     },
-                            //                     child: Text(
-                            //                       'Set on home screen',
-                            //                       style: TextStyle(
-                            //                           fontSize: 14.sp,
-                            //                           fontWeight: FontWeight.w400,
-                            //                           color: AppColors.colorTextMainBlack),
-                            //                     ),
-                            //                   ),
-                            //                 ],
-                            //               ),
-                            //             ),
-                            //             SizedBox(height: 12.h),
-                            //             const Divider(height: 1),
-                            //             SizedBox(height: 16.h),
-                            //             Container(
-                            //               child: Row(
-                            //                 children: [
-                            //                   Image.asset(
-                            //                     "assets/images/lockPhone.png",
-                            //                     height: 20.h,
-                            //                     width: 20.w,
-                            //                   ),
-                            //                   SizedBox(width: 12.w),
-                            //                   InkWell(
-                            //                     onTap: (){
-                            //                       _setWallpaperForLock(querySnapshot!.docs[0].get('imageUrl'));
-                            //                       Navigator.pop(context);
-                            //                     },
-                            //                     child: Text(
-                            //                       "Set on lock screen",
-                            //                       style: TextStyle(
-                            //                           fontSize: 14.sp,
-                            //                           fontWeight: FontWeight.w400,
-                            //                           color: AppColors.colorTextMainBlack),
-                            //                     ),
-                            //                   ),
-                            //                 ],
-                            //               ),
-                            //             ),
-                            //             SizedBox(height: 12.h),
-                            //             const Divider(height: 1),
-                            //             SizedBox(height: 16.h),
-                            //             Container(
-                            //               child: Row(
-                            //                 children: [
-                            //                   Image.asset(
-                            //                     "assets/images/lockPhone2.png",
-                            //                     height: 20.h,
-                            //                     width: 20.w,
-                            //                   ),
-                            //                   SizedBox(width: 12.w),
-                            //                   InkWell(
-                            //                     onTap: (){
-                            //                       _setWallpaperForBoth(querySnapshot!.docs[0].get('imageUrl'));
-                            //                       Navigator.pop(context);
-                            //                     },
-                            //                     child: Text(
-                            //                       'Set on both screen',
-                            //                       style: TextStyle(
-                            //                           fontSize: 14.sp,
-                            //                           fontWeight: FontWeight.w400,
-                            //                           color: AppColors.colorTextMainBlack),
-                            //                     ),
-                            //                   ),
-                            //                 ],
-                            //               ),
-                            //             ),
-                            //             SizedBox(height: 12.h),
-                            //             const Divider(height: 1),
-                            //             SizedBox(height: 16.h),
-                            //             Container(
-                            //               child: Row(
-                            //                 children: [
-                            //                   Image.asset(
-                            //                     "assets/images/save.png",
-                            //                     height: 24.h,
-                            //                     width: 24.w,
-                            //                   ),
-                            //                   SizedBox(width: 12.w),
-                            //                   InkWell(
-                            //                     onTap: (){
-                            //                       _save(querySnapshot!.docs[0].get('imageUrl'), context);
-                            //                       _showRewardedAd();
-                            //                       Navigator.pop(context);
-                            //                     },
-                            //                     child: Text(
-                            //                       'Save to device',
-                            //                       style: TextStyle(
-                            //                           fontSize: 14.sp,
-                            //                           fontWeight: FontWeight.w400,
-                            //                           color: AppColors.colorTextMainBlack),
-                            //                     ),
-                            //                   ),
-                            //                 ],
-                            //               ),
-                            //             ),
-                            //           ],
-                            //         ),
-                            //       ),
-                            //     );
-                            //   },
-                            // );
-                            Fluttertoast.showToast(
-                              msg: 'Coming soon....',
-                              gravity: ToastGravity.BOTTOM,
-                              backgroundColor: Colors.grey[700],
-                              textColor: Colors.white,
+                            showModalBottomSheet(
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(24),
+                                  topRight: Radius.circular(24),
+                                ),
+                              ),
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Container(
+                                  height: 300.h,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                                    child: Column(
+                                      children: <Widget>[
+                                        SizedBox(height: 16.h),
+                                        Image.asset("assets/images/box.png", height: 6.h, width: 40.w),
+                                        SizedBox(height: 24.h),
+                                        Text(
+                                          "What would like to do?",
+                                          style: TextStyle(
+                                              fontSize: 16.sp,
+                                              fontWeight: FontWeight.w700,
+                                              color: AppColors.colorTextMainBlack),
+                                        ),
+                                        SizedBox(height: 24.h),
+                                        Container(
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                "assets/images/phone.png",
+                                                height: 20.h,
+                                                width: 20.w,
+                                              ),
+                                              SizedBox(width: 12.w),
+                                              InkWell(
+                                                onTap: (){
+                                                  _setWallpaperForHome(querySnapshot!.docs[0].get('imageUrl'));
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text(
+                                                  'Set on home screen',
+                                                  style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      fontWeight: FontWeight.w400,
+                                                      color: AppColors.colorTextMainBlack),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(height: 12.h),
+                                        const Divider(height: 1),
+                                        SizedBox(height: 16.h),
+                                        Container(
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                "assets/images/lockPhone.png",
+                                                height: 20.h,
+                                                width: 20.w,
+                                              ),
+                                              SizedBox(width: 12.w),
+                                              InkWell(
+                                                onTap: (){
+                                                  _setWallpaperForLock(querySnapshot!.docs[0].get('imageUrl'));
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text(
+                                                  "Set on lock screen",
+                                                  style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      fontWeight: FontWeight.w400,
+                                                      color: AppColors.colorTextMainBlack),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(height: 12.h),
+                                        const Divider(height: 1),
+                                        SizedBox(height: 16.h),
+                                        Container(
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                "assets/images/lockPhone2.png",
+                                                height: 20.h,
+                                                width: 20.w,
+                                              ),
+                                              SizedBox(width: 12.w),
+                                              InkWell(
+                                                onTap: (){
+                                                  _setWallpaperForBoth(querySnapshot!.docs[0].get('imageUrl'));
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text(
+                                                  'Set on both screen',
+                                                  style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      fontWeight: FontWeight.w400,
+                                                      color: AppColors.colorTextMainBlack),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(height: 12.h),
+                                        const Divider(height: 1),
+                                        SizedBox(height: 16.h),
+                                        Container(
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                "assets/images/save.png",
+                                                height: 24.h,
+                                                width: 24.w,
+                                              ),
+                                              SizedBox(width: 12.w),
+                                              InkWell(
+                                                onTap: (){
+                                                  _save(querySnapshot!.docs[0].get('imageUrl'), context);
+                                                  _showRewardedAd();
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text(
+                                                  'Save to device',
+                                                  style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      fontWeight: FontWeight.w400,
+                                                      color: AppColors.colorTextMainBlack),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
                             );
+
                           },
                           child: const Icon(
                             Icons.format_paint,
