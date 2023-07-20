@@ -437,8 +437,8 @@ class _TrendingScreenState extends State<TrendingScreen> {
                                         onTap: () async {
                                           _setWallpaperForHome(
                                               data?['imageUrl']);
-
                                           Navigator.pop(context);
+                                          _showInterstitialAd();
                                         },
                                         child: Text(
                                           'Set on home screen',
@@ -467,6 +467,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
                                           _setWallpaperForLock(
                                               data?['imageUrl']);
                                           Navigator.pop(context);
+                                          _showInterstitialAd();
                                         },
                                         child: Text(
                                           "Set on lock screen",
@@ -495,6 +496,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
                                           _setWallpaperForBoth(
                                               data?['imageUrl']);
                                           Navigator.pop(context);
+                                          _showInterstitialAd();
                                         },
                                         child: Text(
                                           'Set on both screen',

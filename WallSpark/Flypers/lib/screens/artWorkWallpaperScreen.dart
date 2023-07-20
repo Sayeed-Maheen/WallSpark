@@ -343,140 +343,135 @@ class _ArtworkWallpaperScreenState extends State<ArtworkWallpaperScreen> {
                                                         .colorTextMainBlack),
                                               ),
                                               SizedBox(height: 24.h),
-                                              Container(
-                                                child: Row(
-                                                  children: [
-                                                    Image.asset(
-                                                      "assets/images/phone.png",
-                                                      height: 20.h,
-                                                      width: 20.w,
+                                              Row(
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/phone.png",
+                                                    height: 20.h,
+                                                    width: 20.w,
+                                                  ),
+                                                  SizedBox(width: 12.w),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      _setWallpaperForHome(
+                                                          querySnapshot!
+                                                              .docs[0]
+                                                              .get(
+                                                                  'imageUrl'));
+                                                      Navigator.pop(context);
+                                                      _showInterstitialAd();
+                                                    },
+                                                    child: Text(
+                                                      'Set on home screen',
+                                                      style: TextStyle(
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: AppColors
+                                                              .colorTextMainBlack),
                                                     ),
-                                                    SizedBox(width: 12.w),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        _setWallpaperForHome(
-                                                            querySnapshot!
-                                                                .docs[0]
-                                                                .get(
-                                                                    'imageUrl'));
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: Text(
-                                                        'Set on home screen',
-                                                        style: TextStyle(
-                                                            fontSize: 14.sp,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: AppColors
-                                                                .colorTextMainBlack),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                               SizedBox(height: 12.h),
                                               const Divider(height: 1),
                                               SizedBox(height: 16.h),
-                                              Container(
-                                                child: Row(
-                                                  children: [
-                                                    Image.asset(
-                                                      "assets/images/lockPhone.png",
-                                                      height: 20.h,
-                                                      width: 20.w,
+                                              Row(
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/lockPhone.png",
+                                                    height: 20.h,
+                                                    width: 20.w,
+                                                  ),
+                                                  SizedBox(width: 12.w),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      _setWallpaperForLock(
+                                                          querySnapshot!
+                                                              .docs[0]
+                                                              .get(
+                                                                  'imageUrl'));
+                                                      Navigator.pop(context);
+                                                      _showInterstitialAd();
+                                                    },
+                                                    child: Text(
+                                                      "Set on lock screen",
+                                                      style: TextStyle(
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: AppColors
+                                                              .colorTextMainBlack),
                                                     ),
-                                                    SizedBox(width: 12.w),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        _setWallpaperForLock(
-                                                            querySnapshot!
-                                                                .docs[0]
-                                                                .get(
-                                                                    'imageUrl'));
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: Text(
-                                                        "Set on lock screen",
-                                                        style: TextStyle(
-                                                            fontSize: 14.sp,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: AppColors
-                                                                .colorTextMainBlack),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                               SizedBox(height: 12.h),
                                               const Divider(height: 1),
                                               SizedBox(height: 16.h),
-                                              Container(
-                                                child: Row(
-                                                  children: [
-                                                    Image.asset(
-                                                      "assets/images/lockPhone2.png",
-                                                      height: 20.h,
-                                                      width: 20.w,
+                                              Row(
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/lockPhone2.png",
+                                                    height: 20.h,
+                                                    width: 20.w,
+                                                  ),
+                                                  SizedBox(width: 12.w),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      _setWallpaperForBoth(
+                                                          querySnapshot!
+                                                              .docs[0]
+                                                              .get(
+                                                                  'imageUrl'));
+                                                      Navigator.pop(context);
+                                                      _showInterstitialAd();
+                                                    },
+                                                    child: Text(
+                                                      'Set on both screen',
+                                                      style: TextStyle(
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: AppColors
+                                                              .colorTextMainBlack),
                                                     ),
-                                                    SizedBox(width: 12.w),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        _setWallpaperForBoth(
-                                                            querySnapshot!
-                                                                .docs[0]
-                                                                .get(
-                                                                    'imageUrl'));
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: Text(
-                                                        'Set on both screen',
-                                                        style: TextStyle(
-                                                            fontSize: 14.sp,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: AppColors
-                                                                .colorTextMainBlack),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                               SizedBox(height: 12.h),
                                               const Divider(height: 1),
                                               SizedBox(height: 16.h),
-                                              Container(
-                                                child: Row(
-                                                  children: [
-                                                    Image.asset(
-                                                      "assets/images/save.png",
-                                                      height: 24.h,
-                                                      width: 24.w,
+                                              Row(
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/images/save.png",
+                                                    height: 24.h,
+                                                    width: 24.w,
+                                                  ),
+                                                  SizedBox(width: 12.w),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      _save(
+                                                          querySnapshot!
+                                                              .docs[0]
+                                                              .get(
+                                                                  'imageUrl'),
+                                                          context);
+                                                      _showInterstitialAd();
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Text(
+                                                      'Save to device',
+                                                      style: TextStyle(
+                                                          fontSize: 14.sp,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: AppColors
+                                                              .colorTextMainBlack),
                                                     ),
-                                                    SizedBox(width: 12.w),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        _save(
-                                                            querySnapshot!
-                                                                .docs[0]
-                                                                .get(
-                                                                    'imageUrl'),
-                                                            context);
-                                                        _showInterstitialAd();
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: Text(
-                                                        'Save to device',
-                                                        style: TextStyle(
-                                                            fontSize: 14.sp,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: AppColors
-                                                                .colorTextMainBlack),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
