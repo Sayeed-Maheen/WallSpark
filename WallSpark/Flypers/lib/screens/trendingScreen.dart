@@ -12,6 +12,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../constants.dart';
 import '../widgets/appColors.dart';
 import 'dart:io' show Platform;
 
@@ -252,8 +253,8 @@ class _TrendingScreenState extends State<TrendingScreen> {
   }
 
 
-  RewardedAd? _rewardedAd;
-  int _numRewardedLoadAttempts = 0;
+  InterstitialAd? interstitialAd;
+  int _numInterstitialLoadAttempts = 0;
 
   static final AdRequest request = AdRequest(
     keywords: <String>['foo', 'bar'],
@@ -266,64 +267,66 @@ class _TrendingScreenState extends State<TrendingScreen> {
     getWallpaperOfTheDay();
     // TODO: implement initState
     super.initState();
-    _createRewardedAd();
+    createInterstitial();
   }
 
-  void _createRewardedAd() {
-    RewardedAd.load(
-        adUnitId: Platform.isAndroid
-            ? 'ca-app-pub-3970755962562533/4805760345'
-            : 'ca-app-pub-3970755962562533/4805760345',
-        request: request,
-        rewardedAdLoadCallback: RewardedAdLoadCallback(
-          onAdLoaded: (RewardedAd ad) {
-            print('$ad loaded.');
-            _rewardedAd = ad;
-            _numRewardedLoadAttempts = 0;
-          },
-          onAdFailedToLoad: (LoadAdError error) {
-            print('RewardedAd failed to load: $error');
-            _rewardedAd = null;
-            _numRewardedLoadAttempts += 1;
-            if (_numRewardedLoadAttempts < 3) {
-              _createRewardedAd();
-            }
-          },
-        ));
+  void createInterstitial() {
+    InterstitialAd.load(
+      adUnitId: Platform.isAndroid ? adId : adId,
+      request: request,
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (InterstitialAd ad) {
+          print("Ad Loaded");
+          interstitialAd = ad;
+
+          _numInterstitialLoadAttempts = 0;
+        },
+        onAdFailedToLoad: (LoadAdError error) {
+          print("Ad Failed to Load");
+          interstitialAd = null;
+
+          _numInterstitialLoadAttempts += 1;
+          if (_numInterstitialLoadAttempts < 3) {
+            createInterstitial();
+          }
+        },
+      ),
+    );
   }
 
-  void _showRewardedAd() {
-    if (_rewardedAd == null) {
-      print('Warning: attempt to show rewarded before loaded.');
+  void _showInterstitialAd() {
+    if (interstitialAd == null) {
+      print('Warning: attempt to show interstitialAd before loaded.');
       return;
     }
-    _rewardedAd!.fullScreenContentCallback = FullScreenContentCallback(
-      onAdShowedFullScreenContent: (RewardedAd ad) =>
+    interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) =>
           print('ad onAdShowedFullScreenContent.'),
-      onAdDismissedFullScreenContent: (RewardedAd ad) {
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
         print('$ad onAdDismissedFullScreenContent.');
         ad.dispose();
-        _createRewardedAd();
+        createInterstitial();
       },
-      onAdFailedToShowFullScreenContent: (RewardedAd ad, AdError error) {
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
         print('$ad onAdFailedToShowFullScreenContent: $error');
         ad.dispose();
-        _createRewardedAd();
+        createInterstitial();
       },
     );
 
-    _rewardedAd!.setImmersiveMode(true);
-    _rewardedAd!.show(
-        onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
-      print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
-    });
-    _rewardedAd = null;
+    interstitialAd!.setImmersiveMode(true);
+    interstitialAd!.show(
+      //     onUserEarnedReward: (AdWithoutView ad, RewardItem reward) {
+      //   print('$ad with reward $RewardItem(${reward.amount}, ${reward.type})');
+      // }
+    );
+    interstitialAd = null;
   }
 
   @override
   void dispose() {
     super.dispose();
-    _rewardedAd?.dispose();
+    interstitialAd?.dispose();
   }
 
   final spinkit = const SpinKitRing(
@@ -398,7 +401,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
                       _save(data?['imageUrl'], context);
 
                       //Navigator.pop(context);
-                      _showRewardedAd();
+                      _showInterstitialAd();
                       // showModalBottomSheet(
                       //   shape: const RoundedRectangleBorder(
                       //     borderRadius: BorderRadius.only(

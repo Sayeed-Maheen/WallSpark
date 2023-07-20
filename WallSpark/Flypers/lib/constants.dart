@@ -1,0 +1,1 @@
+const String adId = "ca-app-pub-3970755962562533/7187632677";
