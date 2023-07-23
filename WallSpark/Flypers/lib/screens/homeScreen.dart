@@ -295,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
             elevation: 0),
         body: SingleChildScrollView(
-          physics: const ScrollPhysics(),
+          physics: ClampingScrollPhysics(),
           controller: _scrollControllerSecond,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

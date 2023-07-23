@@ -131,7 +131,6 @@ class _RecentlyUpdatedScreenState extends State<RecentlyUpdatedScreen> {
                   //crossAxisSpacing: 12,
                   mainAxisSpacing: 12),
               controller: _scrollControllerSecond,
-              physics: BouncingScrollPhysics(),
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               itemCount: recentlyUpdated.length,
